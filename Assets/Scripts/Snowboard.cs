@@ -4,15 +4,16 @@ using System;
 
 public class Snowboard : MonoBehaviour {
     public float druck;
+    public float moveSpeed = 700f;
     public Rigidbody rb;
 
-
+    private Vector3 input;
     private GameController gc;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = new Vector3(0f, -0f, -0.3f); ;
+        rb.centerOfMass = new Vector3(0f, 0f, 0f); ;
 
         gc = GameObject.Find("GameController").GetComponent<GameController>();
         if (gc == null)
@@ -22,12 +23,13 @@ public class Snowboard : MonoBehaviour {
 
     void FixedUpdate()
     {
-        rb.AddForce(transform.up * druck); // Drückt Objekt gegen den Boden wenn im Minus Bereich; 7,76
+        //rb.AddForce(transform.up * druck); // Drückt Objekt gegen den Boden wenn im Minus Bereich; 7,76
+
         if(Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(transform.forward * 400f * Time.deltaTime);
+            if(rb.velocity.magnitude < 3)
+                rb.AddForce(transform.forward * 800f * Time.deltaTime);
         }
-            
 
         if (Input.GetKey(KeyCode.D))
         {
@@ -37,13 +39,10 @@ public class Snowboard : MonoBehaviour {
         {
             transform.Rotate(0f, -1f, 0f);
         }
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        if(col.gameObject.tag == "Coin") // Collision mit Coin
+        if (Input.GetKey(KeyCode.Space))
         {
-            gc.AddPoints();
+            rb.velocity = new Vector3(0, 2 , 0); // bleibt stehen bei sprung
         }
+        //print(rb.velocity.magnitude);
     }
 }
