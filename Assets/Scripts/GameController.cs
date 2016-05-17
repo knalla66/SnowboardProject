@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        pointTxt = GameObject.Find("TextTopRight").GetComponent<Text>();
+		pointTxt = GameObject.Find("PointsTopRight").GetComponent<Text>();
         UpdatePoints();
 	}
 	
