@@ -46,13 +46,35 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+     <None Include="Assets\Fonts\blockography\License-READTHIS.txt" />
+     <None Include="Assets\Fonts\oneway\readme.txt" />
      <None Include="Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
+     <None Include="Assets\Fonts\earth_kid\readme.txt" />
+     <None Include="Assets\Fonts\Ginga\LICENSE.txt" />
+     <None Include="Assets\Fonts\dodger\dodge.txt" />
+     <None Include="Assets\Fonts\telemarines\tele.txt" />
+     <None Include="Assets\Fonts\trashco\trashco_Readme.txt" />
+     <None Include="Assets\Fonts\harry_p\harryp-readme.txt" />
+     <None Include="Assets\Fonts\harry_p\lumos-readme.txt" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+     <None Include="Assets\Fonts\Ginga\!!! README FIRST.txt" />
+     <None Include="Assets\Fonts\simpsonsfont\Simpsonfont.txt" />
      <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\Fonts\sixty\readme.txt" />
+     <None Include="Assets\Fonts\Ginga\INSTRUCTION.txt" />
      <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
+     <None Include="Assets\Fonts\comicate\readme.txt" />
+     <None Include="Assets\Fonts\horrendous\readme.txt" />
+     <None Include="Assets\Fonts\harry_p\parseltongue-readme.txt" />
+     <None Include="Assets\Fonts\bauer\Read this.txt" />
+     <None Include="Assets\Fonts\arcade\pizzadudedotdk.txt" />
+     <None Include="Assets\Fonts\backslash\README.txt" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
+     <None Include="Assets\Fonts\molten\readme.txt" />
+     <None Include="Assets\Fonts\madonna\read me.txt" />
+     <None Include="Assets\Fonts\base02\Readme.txt" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>

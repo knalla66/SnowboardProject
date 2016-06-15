@@ -25,12 +25,16 @@ public class Snowboard : MonoBehaviour {
     {
         //rb.AddForce(transform.up * druck); // Drückt Objekt gegen den Boden wenn im Minus Bereich; 7,76
 
-        if(Input.GetKey(KeyCode.W))
+        /*
+         * if(Input.GetKey(KeyCode.W))
         {
             if(rb.velocity.magnitude < 3)
                 rb.AddForce(transform.forward * 800f * Time.deltaTime);
         }
-
+		*/
+		if(rb.velocity.magnitude < 3)
+			rb.AddForce(transform.forward * 800f * Time.deltaTime);
+		
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(0f, 1f, 0f);
@@ -39,9 +43,9 @@ public class Snowboard : MonoBehaviour {
         {
             transform.Rotate(0f, -1f, 0f);
         }
-        if (Input.GetKey(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector3(0, 2 , 0); // bleibt stehen bei sprung
+			rb.velocity = new Vector3(0, 4 , 0); // bleibt stehen bei sprung
         }
         //print(rb.velocity.magnitude);
     }

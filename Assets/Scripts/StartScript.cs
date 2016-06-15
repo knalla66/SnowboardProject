@@ -4,20 +4,39 @@ using UnityEngine.SceneManagement;
 
 public class StartScript : MonoBehaviour {
 
+	AsyncOperation ao;
+
 	// Use this for initialization
 	void Start () {
-
+		
 
 	}
 
 	public void LoadScene(int scene) {
 
-		SceneManager.LoadScene(scene);
+		StartCoroutine(load(scene));
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+
+	IEnumerator load (int scene) {
+		yield return new WaitForSeconds(2);
+		ao = SceneManager.LoadSceneAsync(scene);
+		ao.allowSceneActivation = false;
+
+		while (!ao.isDone) {
+
+			yield return new WaitForSeconds(1);
+			Debug.Log (ao.progress);
+
+			if (ao.progress == 0.9F) {
+				ao.allowSceneActivation = true;
+				break;
+			}
+		}
+
 	}
+
+
+
 }
