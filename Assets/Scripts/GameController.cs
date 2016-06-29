@@ -21,7 +21,8 @@ public class GameController : MonoBehaviour {
 
     public void AddPoints()
     {
-        points++;
+        //points++;
+		points = points + 100;
         UpdatePoints();
     }
 

@@ -47,7 +47,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CoinCollision.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
-     <Compile Include="Assets\Scripts\PointCounter.cs" />
      <Compile Include="Assets\Scripts\Snowboard.cs" />
      <Compile Include="Assets\Scripts\StartScript.cs" />
      <None Include="Assets\Fonts\blockography\License-READTHIS.txt" />
