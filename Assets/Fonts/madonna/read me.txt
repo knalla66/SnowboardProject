@@ -1,0 +1,9 @@
+Confusions on a Dancefloor.
+Font Created by Romulo Genova.
+email/msn: romulogenova@hotmail.com
+
+Caracters:
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z Ç 0
+
+To install the true type font, copy the .ttf file to the fallowing destiny: C:\WINDOWS\FONTS
+Done!
