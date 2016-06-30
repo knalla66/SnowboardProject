@@ -19,7 +19,9 @@ public class CoinCollision : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        gc.AddPoints();
-        Destroy(this.gameObject);
+		if (col.gameObject.tag == "Player") {
+			gc.AddPoints ();
+			Destroy (this.gameObject);
+		}
     }
 }
