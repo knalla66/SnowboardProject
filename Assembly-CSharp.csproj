@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\CheckpointCollision.cs" />
      <Compile Include="Assets\Scripts\CoinCollision.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\OverSceneScript.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Snowboard.cs" />
      <Compile Include="Assets\Scripts\StartScript.cs" />

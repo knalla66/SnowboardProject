@@ -10,17 +10,32 @@ public class StartScript : MonoBehaviour {
 	private GameObject infoBtn;
     private GameObject mainPanel;
     private GameObject highscorePanel;
+    private GameObject infoPanel;
 
     // Use this for initialization
     void Start () {
 		info = GameObject.Find ("InfoText").GetComponent<Text>(); 
 		infoBtn = GameObject.Find ("InfoBtn");
+        infoPanel = GameObject.Find("InfoPanel"); 
         mainPanel = GameObject.Find("MainPanel");
         highscorePanel = GameObject.Find("HighscorePanel");
 
-        Debug.Log(PlayerPrefs.GetInt("highscorePoints"));
         //Zu Beginn ausgeblendet
-        mainPanel.SetActive(false);
+        GameObject param = GameObject.Find("SceneParams"); //Param aus anderer Szene
+        if(param != null)
+        {
+            Debug.Log(param.GetComponent<OverSceneScript>().firstTime);
+            if (param.GetComponent<OverSceneScript>().firstTime)
+            {
+                infoPanel.SetActive(false);
+                mainPanel.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(GameObject.Find("Start"));
+            }               
+        }
+        else
+            mainPanel.SetActive(false);
+
+
         highscorePanel.SetActive(false);
         infoBtn.gameObject.SetActive (false);
 

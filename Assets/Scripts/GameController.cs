@@ -8,18 +8,20 @@ public class GameController : MonoBehaviour {
     private int points = 0;
     private Text pointTxt;
 	private Text timerTxt;
+    private Text infoTxt;
 	private Image loadingbar;
 
     private float timer;
     public float countdown;
-    private bool countdownRunning = false;
+    private bool countdownRunning = true;
 
     // Use this for initialization
     void Start () {
 		pointTxt = GameObject.Find("PointsTopRight").GetComponent<Text>();
 		timerTxt = GameObject.Find("TimerTopLeft").GetComponent<Text>();
-		loadingbar = GameObject.Find ("LoadingBar").GetComponent<Image>();
-
+        infoTxt = GameObject.Find("InfoText").GetComponent<Text>();
+        loadingbar = GameObject.Find ("LoadingBar").GetComponent<Image>(); //Findet loadingbar nicht
+        
         UpdatePoints();
 	}
 	
@@ -33,8 +35,9 @@ public class GameController : MonoBehaviour {
 
 			if (countdown >= 15)
 				loadingbar.color = Color.Lerp (Color.yellow, Color.green, ((countdown - 15) / 15)); //Von grün zu gelb; 1:grün; 2:gelb
-			else 
-				loadingbar.color = Color.Lerp (Color.red, Color.yellow, countdown / 15);
+			else
+                loadingbar.color = Color.Lerp(Color.red, Color.yellow, countdown / 15);
+				
 		}
 	}
 
@@ -55,17 +58,34 @@ public class GameController : MonoBehaviour {
         return points;
     }
 
-    public void AddTime()
-    {
-        countdown += 5f;
-    }
+	public void AddCountdown(float checkpointTime)
+	{
+		countdown += checkpointTime;
+	}
 
-	public void startTimer(bool start){ //if false: stop timer
+	public void startCountdown(bool start){ //if false: stop timer
         countdownRunning = start;
 	}
 
+    public float getCountdown()
+    {
+        return this.countdown;
+    }
+
     public float getTime()
     {
-        return timer;
+        return this.timer;
+    }
+
+    public void setStartGo(String text)
+    {
+        if (text == null)
+            GameObject.Find("PanelInfo").GetComponent<CanvasGroup>().alpha = 0f;
+        else
+        {
+            GameObject.Find("PanelInfo").GetComponent<CanvasGroup>().alpha = 1f;
+            infoTxt.text = text;
+        }
+        
     }
 }

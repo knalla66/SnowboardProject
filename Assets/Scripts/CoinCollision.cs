@@ -4,6 +4,7 @@ using System.Collections;
 public class CoinCollision : MonoBehaviour {
     private GameController gc;
 	public int points;
+	public float boostTime = 3;
 
     // Use this for initialization
     void Start () {
@@ -21,8 +22,15 @@ public class CoinCollision : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
 		if (col.gameObject.tag == "Player") {
-			gc.AddPoints (points);
-			Destroy (this.gameObject);
+            if(this.gameObject.tag == "BoosterCoin")
+            {
+				StartCoroutine(GameObject.Find("Snowboard").GetComponent<Snowboard>().Boost(boostTime));
+            }
+            else
+            {
+                gc.AddPoints(points);
+                Destroy(this.gameObject);
+            }
 		}
     }
 }

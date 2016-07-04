@@ -5,6 +5,7 @@ using System;
 public class Snowboard : MonoBehaviour {
     public float druck;
     public float moveSpeed = 700f;
+    public float maxVelocity = 3f;
     public float jumpForce = 3f;
     public Rigidbody rb;
 
@@ -16,12 +17,18 @@ public class Snowboard : MonoBehaviour {
     private GameController gc;
 	private GameObject pMenu; //Pause Menu
 	private float timerPause = 0f; //Timer to check for PauseMenu
-	private bool started = false;
-    private bool active = true;
-    private bool onEnd = false; //
+
+	private bool started = false; //Wird gestartet sobald gesprungen wurde. Dient zur feststellung ob Spieler noch am Board ist
+    private bool active = true; //Wenn nicht active, pausiert Snowboarder
+    private bool onEnd = false; //True wenn Snowboarder am Ende angelangt ist
+    private bool gameOver = false; //True wenn Spiel verloren ist
+    // For Countdown
+    private bool showCountdown = false;
+    private string countdown; 
 
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0f, 0f, 0f);
 		hori = 0f; vert = 0f;
@@ -32,6 +39,8 @@ public class Snowboard : MonoBehaviour {
 
         if (gc == null)
             Debug.Log("Problem with finding GameController");
+
+       // StartCoroutine(GetReady());
 
     }
 
@@ -50,7 +59,8 @@ public class Snowboard : MonoBehaviour {
             vert = Input.GetAxis("Vertical");
             velocity = rb.velocity.magnitude;
 
-            if (hori != 0f || vert != 0f) // TODO: Problem bei Navigation man müsste mit beiden Füßen gleichzeitig abspringen damit er auf dem jeweiligen Punkt bleibt 
+            //--------------- Pause Menu Timer ---------------
+            if (hori != 0f || vert != 0f)
             {
                 timerPause = 0f;
                 started = false;
@@ -63,8 +73,18 @@ public class Snowboard : MonoBehaviour {
                 pMenu.SetActive(true);
                 started = false;
             }
-           if (rb.velocity.magnitude < 3) //Limit speed
-                rb.AddForce(transform.forward * 600f * Time.deltaTime);
+
+            //------------------ Game Over -------------------
+            if(gc.getCountdown() <= 0f)
+            {
+                this.gameOver = true;
+                setDeactive();
+                pMenu.SetActive(true);
+            }
+
+            //------------------ Physics------------------------
+           if (rb.velocity.magnitude < maxVelocity) //Limit speed
+                rb.AddForce(transform.forward * moveSpeed * Time.deltaTime);
 
            transform.Rotate(0, hori, 0);          
 
@@ -77,11 +97,39 @@ public class Snowboard : MonoBehaviour {
             }
         }
     }
-     
+    // Booster
+	public IEnumerator Boost(float boost)
+    {
+        moveSpeed = 1500f;
+        maxVelocity = 10f;
+		yield return new WaitForSeconds(boost);
+        moveSpeed = 700;
+        maxVelocity = 3f;
+    }
+
+    public IEnumerator GetReady()
+    {
+        setDeactive();
+        gc.setStartGo("3");
+        yield return new WaitForSeconds(0.7f);
+
+        gc.setStartGo("2");
+        yield return new WaitForSeconds(0.7f);
+
+        gc.setStartGo("1");
+        yield return new WaitForSeconds(0.7f);
+
+        gc.setStartGo("GO");
+        yield return new WaitForSeconds(0.4f);
+
+        gc.setStartGo(null);
+        setActive();
+    }
+
     public void setDeactive()
     {
         active = false; 
-		gc.startTimer (false);
+		gc.startCountdown (false);
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }       
     
@@ -89,7 +137,7 @@ public class Snowboard : MonoBehaviour {
     {
         active = true;
         timerPause = 0f;
-		gc.startTimer (true);
+		gc.startCountdown(true);
         rb.constraints = RigidbodyConstraints.None;
     } 
 
@@ -98,13 +146,28 @@ public class Snowboard : MonoBehaviour {
         return Physics.Raycast(transform.position, -Vector3.up, 0.1f);
     }
 
-    public void setOnEnd()
+    public void activatePauseMenu(bool act) //Um PausenMenü einzublenden
+    {
+        pMenu.SetActive(act);
+    }
+
+    public void setOnEnd() // Setzen ob am Ziel angelangt
     {
         onEnd = true;
     }
 
-    public bool isOnEnd()
+    public bool getOnEnd() //Ob am Ziel angelangt
     {
         return onEnd;
+    }
+
+    public void setGameOver(bool gameOver)
+    {
+        this.gameOver = gameOver;
+    }
+
+    public bool getGameOver()
+    {
+        return this.gameOver;
     }
 }
