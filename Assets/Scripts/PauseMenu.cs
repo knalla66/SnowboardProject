@@ -6,7 +6,9 @@ using System.Collections;
 public class PauseMenu : MonoBehaviour {
 
     private Snowboard snowboarder;
-    private bool firstTime = true;
+    public bool firstTime = true;
+    GameObject continueBtn;
+    GameObject restartBtn;
     // Use this for initialization
     void Start () {
         //this.gameObject.SetActive(false);
@@ -18,14 +20,24 @@ public class PauseMenu : MonoBehaviour {
 	void Update () {
          if (this.gameObject.activeSelf)
         {
-            GameObject continueBtn = GameObject.Find("Continue");
+            continueBtn = GameObject.Find("Continue");
+            restartBtn = GameObject.Find("Restart");
+
+
             if (firstTime) //Only highlight button at beginning
             {
-                EventSystem.current.SetSelectedGameObject(continueBtn);
+                EventSystem.current.SetSelectedGameObject(null);
+                if(!snowboarder.isOnEnd())
+                    EventSystem.current.SetSelectedGameObject(continueBtn);
+                else
+                {
+                    continueBtn.SetActive(false);
+                    EventSystem.current.SetSelectedGameObject(restartBtn);
+                }
+                
                 firstTime = false;
-            }
-               
-            snowboarder.setDeactive();
+                snowboarder.setDeactive();
+            }   
         }
 
 	}
@@ -33,6 +45,7 @@ public class PauseMenu : MonoBehaviour {
     public void Continue()
     {
         snowboarder.setActive();
+        firstTime = true;
         this.gameObject.SetActive(false);
     }
 

@@ -1,10 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/StartScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Snowboard.cs">
     <Files>
-      <File FileName="Assets/Scripts/StartScript.cs" Line="12" Column="3" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="14" Column="24" />
-      <File FileName="Assets/Scripts/Snowboard.cs" Line="46" Column="39" />
+      <File FileName="Assets/Scripts/StartScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CoinCollision.cs" Line="22" Column="40" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Snowboard.cs" Line="20" Column="32" />
+      <File FileName="Assets/Scripts/PauseMenu.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

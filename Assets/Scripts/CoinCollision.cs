@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CoinCollision : MonoBehaviour {
     private GameController gc;
+	public int points;
 
     // Use this for initialization
     void Start () {
@@ -14,13 +15,13 @@ public class CoinCollision : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
 
     void OnTriggerEnter(Collider col)
     {
 		if (col.gameObject.tag == "Player") {
-			gc.AddPoints ();
+			gc.AddPoints (points);
 			Destroy (this.gameObject);
 		}
     }
